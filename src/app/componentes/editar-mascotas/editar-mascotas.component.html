@@ -1,0 +1,105 @@
+<header id="main-header" class="py-2 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-user"></i>Editar Mascota</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<form #mascotaForm="ngForm" (ngSubmit)="guardar(mascotaForm.form)">
+
+    <!--Botones -->
+
+    <!-- Botones -->
+    <section id="actions" class="py-4 mb-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a routerLink="/" class="btn btn-light btn-block">
+                        <i class="fas fa-arrow-left"></i> Regresar al inicio
+                    </a>
+                </div>
+    
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="fas fa-check"></i> Guardar mascota
+                    </button>
+                </div>
+    <!--
+                <div class="col-md-3">
+                    <a href="#" (click)="eliminar()" class="btn btn-danger btn-block">
+                        <i class="fas fa-trash"></i> Eliminar mascota
+                    </a>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>Editmascota</h1>
+                        </div>
+                        <div class="card-body">
+ 
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="mascota.nombre"
+                [ngClass]="{ 'is-invalid': nombre.errors && nombre.touched }" required minlength="2" />
+        </div>
+        <div [hidden]="!nombre.errors?.['required']" class="invalid-feedback">
+            Nombre requerido
+        </div>
+        <div [hidden]="!nombre.errors?.['minlength']" class="invalid-feedback">
+            Debe contener al menos 2 caracteres
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">tipo</label>
+            <input type="text" name="tipo" class="form-control" #tipo="ngModel" [(ngModel)]="mascota.tipo"
+                [ngClass]="{ 'is-invalid': tipo.errors && tipo.touched }" required minlength="2" />
+            <div [hidden]="!tipo.errors?.['required']" class="invalid-feedback">
+                tipo requerido
+            </div>
+            <div [hidden]="!tipo.errors?.['minlength']" class="invalid-feedback">
+                Debe contener al menos 2 caracteres
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">enfermedades</label>
+            <input type="enfermedades" name="enfermedades" class="form-control" #enfermedades="ngModel"
+                [(ngModel)]="mascota.enfermedades"
+                [ngClass]="{ 'is-invalid': enfermedades.errors && enfermedades.touched }" required minlength="2" />
+            <div [hidden]="!enfermedades.errors?.['required']" class="invalid-feedback">
+                Enfermedades requerido
+            </div>
+            <div [hidden]="!enfermedades.errors?.['minlength']" class="invalid-feedback">
+                Debe contener al menos 2 caracteres
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">edad</label>
+            <input type="number" name="edad" class="form-control" #edad="ngModel" [(ngModel)]="mascota.edad"
+                [ngClass]="{ 'is-invalid': edad.errors && edad.touched }" required />
+            <div [hidden]="!edad.errors?.['required']" class="invalid-feedback">
+                edad requerido
+            </div>
+        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+</form>

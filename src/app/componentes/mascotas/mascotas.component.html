@@ -1,0 +1,139 @@
+<!-- Botones -->
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                    data-bs-target="#agregarmascotaModal">
+                    <i class="fas fa-plus"></i> Agregar Mascota
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Listado mascotas -->
+<section id="mascotas">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de mascotas</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Enfermedades</th>
+                                <th>Edad</th>
+                                <th>Creacion</th>
+                                <th>Actualizacion</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let mascota of mascotas; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ mascota.nombre }} </td>
+                                <td>{{ mascota.tipo }}</td> <td>{{ mascota.enfermedades }} </td>
+                                <td>{{ mascota.edad}}</td>
+                                <td> {{ mascota.created_at}} </td>
+                                <td> {{ mascota.updated_at}} </td>
+                                <td>
+                                    <a routerLink="/mascota/editar/{{ mascota.id }}" class="btn btn-secondary">
+                                        <i class="fas fa-angle-double-right"></i> Editar
+                                    </a>
+                                    |
+                                    <a href="#" (click)="eliminar(this.mascota)" class="btn btn-danger btn-block">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </a>
+
+
+                                </td>
+                                <td>
+                                
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!--Agregar mascota modal-->
+<div class="modal fade" id="agregarmascotaModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Agregar mascota</h5>
+                <button class="close" data-bs-dismiss="modal" #botonCerrar>
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <flash-messages></flash-messages>
+
+            <form #mascotaForm="ngForm" (ngSubmit)="agregar(mascotaForm.form)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="mascota.nombre"
+                            [ngClass]="{ 'is-invalid': nombre.errors && nombre.touched }" required minlength="2" />
+                    </div>
+                    <div [hidden]="!nombre.errors?.['required']" class="invalid-feedback">
+                        Nombre requerido
+                    </div>
+                    <div [hidden]="!nombre.errors?.['minlength']" class="invalid-feedback">
+                        Debe contener al menos 2 caracteres
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="nombre">tipo</label>
+                        <input type="text" name="tipo" class="form-control" #tipo="ngModel" [(ngModel)]="mascota.tipo"
+                            [ngClass]="{ 'is-invalid': tipo.errors && tipo.touched }" required minlength="2" />
+                        <div [hidden]="!tipo.errors?.['required']" class="invalid-feedback">
+                            tipo requerido
+                        </div>
+                        <div [hidden]="!tipo.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="nombre">enfermedades</label>
+                        <input type="enfermedades" name="enfermedades" class="form-control" #enfermedades="ngModel"
+                            [(ngModel)]="mascota.enfermedades"
+                            [ngClass]="{ 'is-invalid': enfermedades.errors && enfermedades.touched }" required minlength="2" />
+                        <div [hidden]="!enfermedades.errors?.['required']" class="invalid-feedback">
+                            Enfermedades requerido
+                        </div>
+                        <div [hidden]="!enfermedades.errors?.['minlength']" class="invalid-feedback">
+                            Debe contener al menos 2 caracteres
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="nombre">edad</label>
+                        <input type="number" name="edad" class="form-control" #edad="ngModel" [(ngModel)]="mascota.edad"
+                            [ngClass]="{ 'is-invalid': edad.errors && edad.touched }" required />
+                        <div [hidden]="!edad.errors?.['required']" class="invalid-feedback">
+                            edad requerido
+                        </div>
+                    </div>
+            
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
